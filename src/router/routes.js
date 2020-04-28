@@ -2,9 +2,14 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('pages/Index.vue')
+  },
+  {
+    path: '/chat',
+    component: () => import('layouts/ChatLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: 'create', component: () => import('pages/CreateChat.vue') },
+      { path: 'connect', component: () => import('pages/ConnectToChat.vue') }
     ]
   }
 ]
