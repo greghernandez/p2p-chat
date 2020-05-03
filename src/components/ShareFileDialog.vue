@@ -13,8 +13,8 @@
         </q-file>
       </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn rounded label="OK" color="primary" @click="onOk" v-close-popup />
+      <q-card-actions align="center">
+        <q-btn rounded label="Enviar Imagen" color="primary" @click="onOk" v-close-popup no-caps icon="eva-paper-plane-outline" />
       </q-card-actions>
     </q-card>
   </q-dialog>
