@@ -69,15 +69,30 @@ module.exports = function (/* ctx */) {
         'QCardActions',
         'QBtn',
         'QInput',
-        'QForm'
+        'QForm',
+        'QBanner',
+        'QSpinner',
+        'QAvatar',
+        'QFooter',
+        'QMenu',
+        'QSpace',
+        'QScrollArea',
+        'QChatMessage',
+        'QDialog',
+        'QFile',
+        'QImg'
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Dialog'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie

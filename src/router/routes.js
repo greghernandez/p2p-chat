@@ -9,7 +9,10 @@ const routes = [
     component: () => import('layouts/ChatLayout.vue'),
     children: [
       { path: 'create', component: () => import('pages/CreateChat.vue') },
-      { path: 'connect', component: () => import('pages/ConnectToChat.vue') }
+      {
+        path: 'connect',
+        component: () => import('pages/ConnectToChat.vue')
+      }
     ]
   }
 ]
