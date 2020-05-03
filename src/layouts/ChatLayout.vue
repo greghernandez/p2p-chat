@@ -1,5 +1,5 @@
 <template>
-  <div class="gradient-background window-height">
+  <div class="gradient-background">
     <router-view />
   </div>
 </template>

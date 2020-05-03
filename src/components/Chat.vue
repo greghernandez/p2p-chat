@@ -44,19 +44,19 @@
       </q-page-container>
 
       <q-footer>
-        <q-toolbar class="bg-white text-black row">
-          <q-btn round flat icon="eva-attach" class="q-mr-sm" @click="shareFile"/>
+        <q-toolbar class="bg-white text-black q-py-sm row justify-center items-center">
+          <q-btn round flat icon="eva-attach" class="q-mr-xs" @click="shareFile"/>
           <q-input
             rounded
             outlined
             dense
-            class="WAL__field col-grow q-mx-sm"
+            class="WAL__field q-mr-sm col-md-grow"
             bg-color="grey-3"
             v-model="message"
             placeholder="Escribe un mensaje..."
             @keydown.enter.prevent="sendMessage"
           />
-          <q-btn round color="primary" icon="eva-paper-plane-outline" class="q-ml-sm" @click="sendMessage"/>
+          <q-btn round color="primary" icon="eva-paper-plane-outline" @click="sendMessage"/>
         </q-toolbar>
       </q-footer>
     </q-layout>
@@ -87,11 +87,11 @@ export default {
   },
   methods: {
     sendMessage () {
-      this.scrollToElement()
       if (this.message) {
         this.$emit('sendMessage', this.message)
         this.message = undefined
       }
+      this.scrollToElement()
     },
     disconnectChat () {
       this.$emit('disconnectChat')
@@ -103,6 +103,7 @@ export default {
         var blob = new Blob([file, { type: file.type }])
         console.log('Blob:', blob)
         this.$emit('sendMessage', blob)
+        this.scrollToElement()
       })
     },
     imgLink (blob) {

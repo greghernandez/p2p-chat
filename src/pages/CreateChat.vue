@@ -1,34 +1,35 @@
 <template>
-  <div class="flex flex-center window-height" >
-    <q-card v-if="connection === null" class="my-card text-center">
-      <q-card-section>
-        <div class="text-h5 text-primary text-bold">Crear Chat</div>
-      </q-card-section>
+  <div>
+    <div v-if="connection === null" class="flex flex-center window-height">
+      <q-card class="my-card text-center">
+        <q-card-section>
+          <div class="text-h5 text-primary text-bold">Crear Chat</div>
+        </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        <div class="text-subtitle1 q-py-sm">Comparte el ID de tu chat</div>
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1 q-py-sm">Comparte el ID de tu chat</div>
 
-        <div class="q-px-md q-py-md">
-          <q-input filled dense :value="myPeerId" readonly>
+          <div class="q-px-md q-py-md">
+            <q-input filled dense :value="myPeerId" readonly>
+              <template v-slot:prepend>
+                <q-icon name="eva-lock-outline" />
+              </template>
 
-            <template v-slot:prepend>
-              <q-icon name="eva-lock-outline" />
-            </template>
-
-            <template v-slot:after>
-              <q-btn round color="primary" icon="eva-copy-outline" @click="coppyChatId(myPeerId)" />
-            </template>
-          </q-input>
-        </div>
-
-        <div v-if="waiting">
-          <div>
-            <q-spinner color="primary" size="2em" />
+              <template v-slot:after>
+                <q-btn round color="primary" icon="eva-copy-outline" @click="coppyChatId(myPeerId)" />
+              </template>
+            </q-input>
           </div>
-          <div>Esperando una conexión</div>
-        </div>
-      </q-card-section>
-    </q-card>
+
+          <div v-if="waiting">
+            <div>
+              <q-spinner color="primary" size="2em" />
+            </div>
+            <div>Esperando una conexión</div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </div>
 
     <!-- Chat View-->
     <chat
@@ -65,9 +66,9 @@ export default {
     // Create Peer
     this.myPeer = new this.$Peer(null, {
       debug: 3,
-      host: 'localhost',
-      port: 9000,
-      path: '/',
+      // host: 'localhost',
+      // port: 9000,
+      // path: '/',
       config: {
         iceServers: [
           { url: 'stun:stun.l.google.com:19302' },
@@ -91,6 +92,7 @@ export default {
       console.log('- Connection:', this.connection)
       // Notify message
       this.$q.notify({
+        position: 'top',
         message: 'Conectado',
         color: 'positive',
         icon: 'eva-checkmark-circle-outline'
@@ -138,6 +140,7 @@ export default {
       copyToClipboard(chatId)
         .then(() => {
           this.$q.notify({
+            position: 'top',
             message: 'ID copiado',
             color: 'positive',
             icon: 'eva-copy-outline'

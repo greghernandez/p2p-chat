@@ -1,25 +1,27 @@
 <template>
-  <div class="flex flex-center window-height">
+  <div>
     <!-- Conect Card-->
-    <q-card v-if="connection === null" class="my-card text-center">
-      <q-card-section>
-        <div class="text-h5 text-primary text-bold">Unirme a un Chat</div>
-      </q-card-section>
+    <div v-if="connection === null" class="flex flex-center window-height">
+      <q-card class="my-card text-center">
+        <q-card-section>
+          <div class="text-h5 text-primary text-bold">Unirme a un Chat</div>
+        </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        <div class="text-subtitle1 q-py-sm">Ingresa el ID del chat</div>
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1 q-py-sm">Ingresa el ID del chat</div>
 
-        <q-form @submit="connect" class="q-gutter-sm">
-          <q-input rounded outlined dense clearable v-model="chatId" label="Id de Chat" icon="ion-key-outline" lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Completa el campo']">
-            <template v-slot:prepend>
-              <q-icon name="eva-lock-outline" />
-            </template>
-          </q-input>
-          <q-btn rounded color="primary" label="Conectar" type="submit" no-caps />
-        </q-form>
-      </q-card-section>
-    </q-card>
+          <q-form @submit="connect" class="q-gutter-sm">
+            <q-input rounded outlined dense clearable v-model="chatId" label="Id de Chat" icon="ion-key-outline" lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Completa el campo']">
+              <template v-slot:prepend>
+                <q-icon name="eva-lock-outline" />
+              </template>
+            </q-input>
+            <q-btn rounded color="primary" label="Conectar" type="submit" no-caps />
+          </q-form>
+        </q-card-section>
+      </q-card>
+    </div>
 
     <!-- Chat View-->
     <Chat
@@ -53,9 +55,9 @@ export default {
   created () {
     this.myPeer = new Peer(null, {
       debug: 3,
-      host: 'localhost',
-      path: '/',
-      port: 9000,
+      // host: 'localhost',
+      // path: '/',
+      // port: 9000,
       config: {
         iceServers: [
           { url: 'stun:stun.l.google.com:19302' },
