@@ -10,10 +10,7 @@
 
           <q-space/>
 
-          <q-btn round flat icon="eva-video-outline" />
-          <q-btn round flat>
-            <q-icon name="eva-mic-outline" />
-          </q-btn>
+          <!-- <q-btn round flat icon="eva-video-outline" @click="videocall()"/> -->
           <q-btn round flat icon="eva-close" @click="disconnectChat" />
         </q-toolbar>
       </q-header>
@@ -66,6 +63,7 @@
 <script>
 import ShareFileDialog from 'components/ShareFileDialog.vue'
 import ImageViewerDialog from 'components/ImgViewer.vue'
+import VideocallDialog from 'components/VideoCallDialog.vue'
 
 export default {
   name: 'ChatLayout',
@@ -117,8 +115,12 @@ export default {
         component: ImageViewerDialog,
         image: this.imgLink(image.blob),
         imgData: image
-      }).onOk(() => {
       })
+    },
+    videocall () {
+      this.$q.dialog({
+        component: VideocallDialog
+      }).onOk(console.log('videocall'))
     },
     scrollToElement () {
       // takes an element object
