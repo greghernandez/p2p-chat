@@ -102,6 +102,9 @@ export default {
       // Receiving Data
       this.connection.on('data', (data) => {
         console.log(data)
+        /* if (typeof data === 'object') {
+          data = new Blob([data.blob], { name: this.data.name, type: this.data.type })
+        } */
         var element = {}
         element.received = data
         this.messages.push(element)

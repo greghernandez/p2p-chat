@@ -80,7 +80,9 @@ module.exports = function (/* ctx */) {
         'QChatMessage',
         'QDialog',
         'QFile',
-        'QImg'
+        'QImg',
+        'QBar',
+        'QTooltip'
       ],
 
       directives: [

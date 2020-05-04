@@ -25,7 +25,7 @@
             <div v-if="msg.received">
               <div v-if="(typeof msg.received) === 'object'" class="q-py-sm">
                 <q-chat-message>
-                  <img :src="imgLink(msg.received)" style="max-width: 38vw">
+                  <img :src="imgLink(msg.received.blob)" @click="viewPhoto(msg.received)" style="max-width: 38vw">
                 </q-chat-message>
               </div>
               <q-chat-message v-else :text="[msg.received]" />
@@ -34,7 +34,7 @@
             <div v-else>
               <div v-if="(typeof msg) === 'object'" class="q-py-sm">
                 <q-chat-message sent>
-                  <img :src="imgLink(msg)" style="max-width: 38vw">
+                  <img :src="imgLink(msg.blob)" @click="viewPhoto(msg)" style="max-width: 38vw">
                 </q-chat-message>
               </div>
               <q-chat-message v-else :text="[msg]" sent />
@@ -65,6 +65,7 @@
 
 <script>
 import ShareFileDialog from 'components/ShareFileDialog.vue'
+import ImageViewerDialog from 'components/ImgViewer.vue'
 
 export default {
   name: 'ChatLayout',
@@ -100,15 +101,24 @@ export default {
       this.$q.dialog({
         component: ShareFileDialog
       }).onOk((file) => {
-        var blob = new Blob([file, { type: file.type }])
+        var blob = new Blob([file, { name: file.name, type: file.type }])
+        blob = new File([blob], file.name)
         console.log('Blob:', blob)
-        this.$emit('sendMessage', blob)
+        this.$emit('sendMessage', { blob, name: file.name })
         this.scrollToElement()
       })
     },
     imgLink (blob) {
       blob = new Blob([blob], { type: blob.type })
       return window.URL.createObjectURL(blob)
+    },
+    viewPhoto (image) {
+      this.$q.dialog({
+        component: ImageViewerDialog,
+        image: this.imgLink(image.blob),
+        imgData: image
+      }).onOk(() => {
+      })
     },
     scrollToElement () {
       // takes an element object

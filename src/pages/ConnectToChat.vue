@@ -81,6 +81,7 @@ export default {
         // Receive messages
         this.connection.on('data', (data) => {
           console.log('Received', data)
+          console.log(typeof data)
           var element = {}
           element.received = data
           this.messages.push(element)
