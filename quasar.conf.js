@@ -6,10 +6,9 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
-// ZEIT-NOW special config
-module.exports = function (ctx) {
+
+module.exports = function (/* ctx */) {
   return {
-    distDir: ctx.mode.spa ? 'public' : null,
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
